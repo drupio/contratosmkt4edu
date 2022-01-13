@@ -2,19 +2,10 @@
 <html lang="pt-BR">
 
 <head>
-    <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
-    <script>
-        window.OneSignal = window.OneSignal || [];
-        OneSignal.push(function() {
-            OneSignal.init({
-                appId: "2d2da1a0-e87d-49b7-ae22-74337f599a58",
-            });
-        });
-    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Atlan Group | Gestor de Horas</title>
+    <title> MKT for Education | Controle de Projetos</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="../assets/images/favicon.ico" />
@@ -44,6 +35,8 @@
     <!-- CSS -->
     <link rel="stylesheet" href="../libs/dataTable/datatables.min.css" type="text/css">
     <link rel="stylesheet" href="../libs/datepicker/daterangepicker.css" type="text/css">
+    <link rel="stylesheet" href="../libs/lightbox/magnific-popup.css" type="text/css">
+    
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -60,7 +53,7 @@
 
     <!-- preloader -->
     <div class="preloader">
-        <img src="../assets/images/logo.svg" alt="logo">
+        <img src="../assets/images/logo.png" alt="logo">
         <div class="preloader-icon"></div>
     </div>
     <!-- ../ preloader -->
@@ -68,7 +61,7 @@
     <div class="menu">
         <div class="menu-header">
             <a href="#" class="menu-header-logo">
-                <img src="../assets/images/logo.svg" alt="logo">
+                <img src="../assets/images/logo.png" alt="logo">
             </a>
             <a href="#" class="btn btn-sm menu-close-btn">
                 <i class="bi bi-x"></i>
@@ -86,7 +79,7 @@
                     </div>
                     <div>
                         <div class="fw-bold text-dark text-uppercase"><?php echo $dados_user['nome_user']; ?></div>
-                        <small class="text-muted"><?php echo $dados_user['cargo_nome']; ?></small>
+                        <small class="text-muted">Seja bem-vindo(a)!</small>
                     </div>
                 </a>
                 <div class="dropdown-menu dropdown-menu-end">

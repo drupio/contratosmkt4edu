@@ -1,13 +1,4 @@
 <?php
-$sql = "SELECT * FROM users WHERE id_user = '$id_user'";
-$resultado = mysqli_query($conexao, $sql);
-$senhaUser = mysqli_fetch_array($resultado);
-if ($senhaUser['pwd_user'] == "25d55ad283aa400af464c76d713c07ad" and $senhaUser['id_user'] == $_SESSION['id_user']) : ?>
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Troque sua Senha!</strong> <a href="../views/perfil.php">Clique aqui</a> e altere para uma de sua preferência.
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-<?php endif;
 if (isset($_SESSION['success'])) : ?>
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         <strong>Sucesso!!!</strong> Alteração realizada.

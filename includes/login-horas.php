@@ -27,15 +27,7 @@ if ($row == 1) :
     $dados = mysqli_fetch_assoc($resultado);
     $_SESSION['on'] = true;
     $_SESSION['id_user'] = $dados['id_user'];
-    $_SESSION['setor_user'] = $dados['setor_user'];
-    $_SESSION['nivel'] = $dados['nivel_user'];
-    if ($_SESSION['nivel'] == 88 or $_SESSION['nivel'] == 77) {
-        header('Location: ../views/colaboradores.php');
-    } elseif ($_SESSION['nivel'] == 1010 or $_SESSION['nivel'] == 99 or $_SESSION['nivel'] == 66) {
-        header('Location: ../views/empresas.php');
-    } else {
-        header('Location: ../views/dash.php');
-    };
+    header('Location: ../views/dash.php');
 else :
     $_SESSION['erro'] = true;
     header('Location: ../index.php');

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 ?>
 
 <!doctype html>
@@ -9,7 +10,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title> Atlan Group | Gestor de Projetos</title>
+    <title>Marketing for Education</title>
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="./assets/images/favicon.ico" />
@@ -41,7 +42,7 @@ session_start();
                         <div class="row">
                             <div class="col-md-10 offset-md-1">
                                 <div class="d-block d-lg-none text-center text-lg-start">
-                                    <img width="120" src="./assets/images/logo.svg" alt="logo">
+                                    <img width="120" src="./assets/images/mktlogo-login.png" alt="logo">
                                 </div>
                                 <div class="my-5 text-center text-lg-start">
                                     <h1 class="display-8">Entrar</h1>
@@ -88,8 +89,8 @@ session_start();
                     </div>
                     <div class="col d-none d-lg-flex border-start align-items-center justify-content-center flex-column text-center">
                         <div>
-                            <img width="250" src="./assets/images/logo.svg" alt="logo">
-                            <p class="lead mt-5">Bem-vindo ao portal do colaborador.</p>
+                            <img src="./assets/images/mktlogo-login.png" alt="logo">
+                            <p class="lead mt-5">Bem-Vindo(a) ao portal de Marketing para captação e fidelização de famílias e estudantes.</p>
                         </div>
                     </div>
                 </div>
