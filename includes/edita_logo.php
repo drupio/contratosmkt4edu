@@ -16,6 +16,14 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 
 include 'conexao.php';
 
+// tamanho do upload
+define('KB', 1024);
+define('MB', 1048576);
+define('GB', 1073741824);
+define('TB', 1099511627776);
+$pesoArquivo = 1000 * KB;
+
+
 //Clear
 function clear($input)
 {
@@ -28,18 +36,22 @@ function clear($input)
 }
 
 $url = mysqli_escape_string($conexao, $_POST['url']);
-$nomeSetor = mysqli_real_escape_string($conexao, $_POST['nome_setor']);
-$nomeSetor = strtoupper($nomeSetor);
-$nomeUser = mysqli_real_escape_string($conexao, $_POST['id_user']);
+$id_cliente = mysqli_escape_string($conexao, $_POST['id_cliente']);
 
-$sqlSetor = "INSERT INTO setores (nome_setor, setor_criado_por, setor_criado_em) VALUES ('$nomeSetor', '$nomeUser', '$data')";
-
-if (mysqli_query($conexao, $sqlSetor)) :
-    $_SESSION['success'] = true;
+if ($_FILES['logo']['size'] > $pesoArquivo) :
+    $_SESSION['erro-peso'] = true;
     header("Location: $url");
+    exit;
 else :
-    // $_SESSION['erro'] = true;
-    // header("Location: $url");
+    $logo_cliente = md5($_FILES['logo']['name'] . rand(1, 999)) . '.jpg';
+    move_uploaded_file($_FILES['logo']['tmp_name'], "../assets/images/logos/$logo_cliente");
+endif;
+
+$sql = "UPDATE clientes SET logo_cliente = '$logo_cliente' WHERE id_cliente = '$id_cliente'";
+if (mysqli_query($conexao, $sql)) :
+    $_SESSION['success'] = true;
+    header("Location: $url?id=$id_cliente");
+else :
     $msg = mysqli_error($conexao);
     echo $msg;
 endif;

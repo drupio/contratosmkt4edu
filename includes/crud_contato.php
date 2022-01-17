@@ -16,6 +16,7 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 
 include 'conexao.php';
 
+
 //Clear
 function clear($input)
 {
@@ -27,19 +28,19 @@ function clear($input)
     return $var;
 }
 
-$url = mysqli_escape_string($conexao, $_POST['url']);
-$nomeEmpresa = mysqli_real_escape_string($conexao, $_POST['nome_empresa']);
-$nomeEmpresa = strtoupper($nomeEmpresa);
-$nomeUser = mysqli_real_escape_string($conexao, $_POST['id_user']);
+$id = mysqli_escape_string($conexao, $_POST['id']);
+$responsavel = mysqli_real_escape_string($conexao, $_POST['responsavel']);
+$telefone = mysqli_real_escape_string($conexao, $_POST['telefone']);
+$whatsapp = mysqli_real_escape_string($conexao, $_POST['whatsapp']);
+$email = mysqli_real_escape_string($conexao, $_POST['email']);
+$endereco = mysqli_real_escape_string($conexao, $_POST['endereco']);
+$site = mysqli_real_escape_string($conexao, $_POST['site']);
 
-$sqlEmpresa = "INSERT INTO empresas (nome_empresa, empresa_criada_por, empresa_criada_em) VALUES ('$nomeEmpresa', '$nomeUser', '$data')";
-
-if (mysqli_query($conexao, $sqlEmpresa)) :
+$sql = "INSERT INTO contatos_clientes VALUES (default, '$id', '$responsavel', '$telefone', '$whatsapp', '$email', '$site', '$endereco')";
+if (mysqli_query($conexao, $sql)) :
     $_SESSION['success'] = true;
-    header("Location: $url");
+    header("Location: ../views/clientes.php");
 else :
-    // $_SESSION['erro'] = true;
-    // header("Location: $url");
     $msg = mysqli_error($conexao);
     echo $msg;
 endif;

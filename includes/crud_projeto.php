@@ -28,24 +28,37 @@ function clear($input)
 }
 
 $url = mysqli_escape_string($conexao, $_POST['url']);
+$user = mysqli_escape_string($conexao, $_POST['user']);
 
-$empresaProjeto = mysqli_real_escape_string($conexao, $_POST['empresa_projeto']);
-$setorProjeto = mysqli_real_escape_string($conexao, $_POST['setor_projeto']);
-$produtoProjeto = mysqli_real_escape_string($conexao, $_POST['produto_projeto']);
-$nomeProjeto = mysqli_real_escape_string($conexao, $_POST['nome_projeto']);
-$nomeProjeto = strtoupper($nomeProjeto);
-$prazoProjeto = mysqli_real_escape_string($conexao, $_POST['prazo_projeto']);
-$descricaoProjeto = mysqli_real_escape_string($conexao, $_POST['descricao_projeto']);
-$user = mysqli_real_escape_string($conexao, $_POST['id_user']);
+$cnpj = mysqli_real_escape_string($conexao, $_POST['cnpj']);
+$cliente = mysqli_real_escape_string($conexao, $_POST['cliente']);
+$projeto = mysqli_real_escape_string($conexao, $_POST['projeto']);
+$status = mysqli_real_escape_string($conexao, $_POST['status']);
+$hora = mysqli_real_escape_string($conexao, $_POST['horas']);
+$hora = $hora * 60;
+$minuto = mysqli_real_escape_string($conexao, $_POST['minutos']);
+$minuto = $hora + $minuto;
+$comentario = mysqli_real_escape_string($conexao, $_POST['comentario']);
 
-$sqlProjeto = "INSERT INTO projetos (empresa_projeto, setor_projeto, produto_projeto, nome_projeto, prazo_projeto, descricao_projeto, projeto_criado_em, projeto_criado_por) VALUES ('$empresaProjeto', '$setorProjeto', '$produtoProjeto', '$nomeProjeto', '$prazoProjeto', '$descricaoProjeto', '$data', '$user')";
-
-if (mysqli_query($conexao, $sqlProjeto)) :
-    $_SESSION['success'] = true;
-    header("Location: $url");
+if ($_FILES['anexo']['size'] > 0) :
+    $arquivo = $_FILES['anexo']['name'];
+    $arquivo = str_replace(' ', '-', $arquivo);
+    $ext = pathinfo($arquivo, PATHINFO_EXTENSION);
+    $arquivonome = pathinfo($arquivo, PATHINFO_FILENAME);
+    $anexo = $arquivonome . '_' . $cliente . '_' . md5(rand(1, 99)) . '.' . $ext;
+    move_uploaded_file($_FILES['anexo']['tmp_name'], "../assets/anexos/$anexo");
 else :
-    // $_SESSION['erro'] = true;
-    // header("Location: $url");
-    $msg = mysqli_error($conexao);
-    echo $msg;
+    $anexo = null;
+endif;
+
+$sqlProjeto = "INSERT INTO timeline VALUES (default, '$cliente', '$projeto', '$status', '$minuto', '$anexo', '$comentario', '$data', '$user')";
+if (mysqli_query($conexao, $sqlProjeto)) :
+    $sqlstatus = "UPDATE projetos_clientes SET status = '$status' WHERE cliente = '$cnpj' AND projeto = '$projeto'";
+    if (mysqli_query($conexao, $sqlstatus)) :
+        $_SESSION['success'] = true;
+        header("Location: $url?id=$cliente");
+    else :
+        $msg = mysqli_error($conexao);
+        echo $msg;
+    endif;
 endif;

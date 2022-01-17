@@ -2,7 +2,7 @@
 $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro");
 ?>
 
-<!-- MODAL LANÇAMENTO HORAS -->
+<!-- MODAL CLIENTE -->
 <div class="modal fade" id="addModal" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
     <form action="../includes/crud_cliente.php" class="form-floating" enctype="multipart/form-data" method="POST">
         <input type="hidden" name="url" value="<?php echo $url; ?>">
@@ -13,12 +13,12 @@ $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julh
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="row mb-3">
+                    <!-- <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="" class="form-label">Logo</label>
                             <input type="file" name="logo" class="form-control" id="">
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row mb-3">
                         <div class="col-md-3 mb-3 form-floating">
                             <input type="text" data-input-mask="cnpj" name="cnpj" class="form-control" placeholder="CNPJ" required>
@@ -55,35 +55,65 @@ $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julh
                         <div class="col-md-6">
                             <label class="form-label">Projetos do cliente</label>
                             <div class="d-flex flex-wrap">
-                                <div class="form-check px-4 mb-3">
-                                    <input class="form-check-input" type="checkbox" name="projeto[]" value="1" id="1">
-                                    <label class="form-check-label" for="1">
-                                        Audiovisual
-                                    </label>
-                                </div>
-                                <div class="form-check px-4 mb-3">
-                                    <input class="form-check-input" type="checkbox" name="projeto[]" value="2" id="2">
-                                    <label class="form-check-label" for="2">
-                                        Website
-                                    </label>
-                                </div>
-                                <div class="form-check px-4 mb-3">
-                                    <input class="form-check-input" type="checkbox" name="projeto[]" value="3" id="3">
-                                    <label class="form-check-label" for="3">
-                                        Fachada
-                                    </label>
-                                </div>
-                                <div class="form-check px-4 mb-3">
-                                    <input class="form-check-input" type="checkbox" name="projeto[]" value="4" id="4">
-                                    <label class="form-check-label" for="4">
-                                        Pesquisa
-                                    </label>
-                                </div>
+                                <?php
+                                $sqlProj = "SELECT * FROM projetos_existentes";
+                                $rP = mysqli_query($conexao, $sqlProj);
+                                while ($proj = mysqli_fetch_array($rP)) :
+                                ?>
+                                    <div class="form-check px-4 mb-3">
+                                        <input class="form-check-input" type="checkbox" name="projeto[]" value="<?php echo $proj['id_projeto'] ?>" id="<?php echo $proj['id_projeto'] ?>">
+                                        <label class="form-check-label" for="<?php echo $proj['id_projeto'] ?>">
+                                            <span class="text-uppercase"><?php echo $proj['nome_projeto'] ?></span>
+                                        </label>
+                                    </div>
+                                <?php endwhile; ?>
                             </div>
                         </div>
                         <div class="col-md-6 form-floating">
                             <textarea class="form-control" maxlength="2000" name="observacao" placeholder="Observação" style="height: 100px;"></textarea>
                             <label>Observação</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <div class="btn-group" role="group">
+                        <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            Cadastrar
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end p-0" aria-labelledby="btnGroupDrop1">
+                            <li class="p-3">Você tem certeza?</li>
+                            <li><button type="submit" class="btn btn-success w-100 text-light" style="border-radius: 0 0 7px 7px;">SIM</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<!-- FECHA MODAL -->
+
+<!-- MODAL PROJETO -->
+<div class="modal fade" id="addProjeto" data-bs-backdrop="static" tabindex="-1" aria-hidden="true">
+    <form action="../includes/crud_addprojetos.php" class="form-floating" enctype="multipart/form-data" method="POST">
+        <input type="hidden" name="url" value="<?php echo $url; ?>">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5>Cadastrar Novo Projeto</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="text" class="form-control text-uppercase" name="nome_projeto" placeholder="Nome do Projeto" required>
+                            <label>Nome do Projeto</label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" maxlength="2000" name="desc_projeto" placeholder="Descrição do Projeto" style="height: 100px;"></textarea>
+                            <label>Descrição do Projeto</label>
                         </div>
                     </div>
                 </div>

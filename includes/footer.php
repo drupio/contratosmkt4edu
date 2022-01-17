@@ -52,16 +52,6 @@
 </script>
 
 <script>
-    $('input[name="prazo_projeto"]').daterangepicker({
-        locale: {
-            format: 'DD/MM/YYYY'
-        },
-        singleDatePicker: true,
-        showDropdowns: true
-    });
-</script>
-
-<script>
     $(document).ready(function() {
         $('#datatable').DataTable({
             "language": {
@@ -101,9 +91,7 @@
     });
     $('[data-input-mask="ano"]').mask('00');
     $('[data-input-mask="anos"]').mask('0000');
-    $('[data-input-mask="calendario"]').mask("00/00/0000", {
-        placeholder: "__/__/____"
-    });
+    $('[data-input-mask="calendario"]').mask("00/00/0000");
 </script>
 
 <script src="../libs/lightbox/jquery.magnific-popup.min.js"></script>

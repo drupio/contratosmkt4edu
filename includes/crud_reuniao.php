@@ -16,6 +16,7 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 
 include 'conexao.php';
 
+
 //Clear
 function clear($input)
 {
@@ -28,20 +29,15 @@ function clear($input)
 }
 
 $url = mysqli_escape_string($conexao, $_POST['url']);
-$nomeProduto = mysqli_real_escape_string($conexao, $_POST['nome_produto']);
-$nomeProduto = strtoupper($nomeProduto);
-$id_empresa = mysqli_real_escape_string($conexao, $_POST['id_empresa']);
-$descricao = mysqli_real_escape_string($conexao, $_POST['descricao_produto']);
-$nomeUser = mysqli_real_escape_string($conexao, $_POST['id_user']);
+$id = mysqli_escape_string($conexao, $_POST['id']);
+$user = mysqli_escape_string($conexao, $_POST['user']);
+$reuniao = mysqli_escape_string($conexao, $_POST['reuniao']);
 
-$sqlProduto = "INSERT INTO produtos (nome_produto, empresa_produto, descricao_produto, produto_criado_por, produto_criado_em) VALUES ('$nomeProduto', '$id_empresa', '$descricao', '$nomeUser', '$data')";
-
-if (mysqli_query($conexao, $sqlProduto)) :
+$sql = "INSERT INTO reuniao VALUES (default, '$id', '$reuniao', '$data', '$user')";
+if (mysqli_query($conexao, $sql)) :
     $_SESSION['success'] = true;
-    header("Location: $url");
+    header("Location: $url?id=$id");
 else :
-    // $_SESSION['erro'] = true;
-    // header("Location: $url");
     $msg = mysqli_error($conexao);
     echo $msg;
 endif;
