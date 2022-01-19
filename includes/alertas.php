@@ -8,7 +8,7 @@ if (isset($_SESSION['success'])) : ?>
 unset($_SESSION['success']); ?>
 <?php if (isset($_SESSION['erro'])) : ?>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <strong>Erro!!!</strong> Alteração não realizada.
+        <strong>Erro!!!</strong> Alteração não realizada. 
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 <?php endif;
