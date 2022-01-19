@@ -19,7 +19,7 @@ $senha = md5($senha);
 
 $login = trim($login);
 
-$sql = "SELECT * FROM users WHERE email_user = '$login' AND pwd_user = '$senha' AND status_user = 1";
+$sql = "SELECT * FROM users WHERE email_user = '$login' AND pwd_user = '$senha'";
 $resultado = mysqli_query($conexao, $sql);
 $row = mysqli_num_rows($resultado);
 
