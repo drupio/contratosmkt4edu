@@ -49,21 +49,18 @@ if (isset($_POST['mudar_senha'])) :
 endif;
 
 if (isset($_POST['mudar_foto'])) :
-
+    $user = mysqli_escape_string($conexao, $_POST['id']);
     if (
         $_FILES['foto']['size'] > $pesoArquivo
     ) :
         $_SESSION['erro-peso'] = true;
-        header("Location: ../../cadastro.php");
+        header("Location: $url");
         exit;
     else :
-        $user = mysqli_escape_string($conexao, $_POST['id']);
         $foto = md5($_FILES['foto']['name'] . rand(1, 999)) . '.jpg';
-
         move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/images/user/$foto");
 
         $sql = "UPDATE users SET foto_user = '$foto' WHERE id_user = '$user'";
-
         if (mysqli_query($conexao, $sql)) :
             $_SESSION['success'] = true;
             header("Location: $url");

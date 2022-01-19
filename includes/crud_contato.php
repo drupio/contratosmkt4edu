@@ -28,6 +28,8 @@ function clear($input)
     return $var;
 }
 
+$url = mysqli_escape_string($conexao, $_POST['url']);
+$user = mysqli_escape_string($conexao, $_POST['user']);
 $id = mysqli_escape_string($conexao, $_POST['id']);
 $responsavel = mysqli_real_escape_string($conexao, $_POST['responsavel']);
 $telefone = mysqli_real_escape_string($conexao, $_POST['telefone']);
@@ -36,10 +38,10 @@ $email = mysqli_real_escape_string($conexao, $_POST['email']);
 $endereco = mysqli_real_escape_string($conexao, $_POST['endereco']);
 $site = mysqli_real_escape_string($conexao, $_POST['site']);
 
-$sql = "INSERT INTO contatos_clientes VALUES (default, '$id', '$responsavel', '$telefone', '$whatsapp', '$email', '$site', '$endereco')";
+$sql = "UPDATE clientes SET responsavel = '$responsavel', telefone = '$telefone', whatsapp = '$whatsapp', email = '$email', site = '$site', endereco = '$endereco', editado_em = '$data', editado_por = '$user' WHERE id_cliente = '$id'";
 if (mysqli_query($conexao, $sql)) :
     $_SESSION['success'] = true;
-    header("Location: ../views/clientes.php");
+    header("Location: $url?id=$id");
 else :
     $msg = mysqli_error($conexao);
     echo $msg;

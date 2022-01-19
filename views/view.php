@@ -48,6 +48,18 @@ include '../includes/menu.php';
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="mb-4">
+                            <!-- <div class="card widget mb-4">
+                                <h6 class="card-title mb-4">Projetos Contratados</h6>
+                                <div class="d-flex flex-wrap">
+                                    <?php
+                                    $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto WHERE cliente = '$id' ";
+                                    $rP = mysqli_query($conexao, $sqlProjetos);
+                                    while ($p = mysqli_fetch_array($rP)) :
+                                    ?>
+                                        <p class="btn btn-primary text-uppercase m-2"><?php echo $p['nome_projeto'] ?></p>
+                                    <?php endwhile; ?>
+                                </div>
+                            </div> -->
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h6 class="card-title mb-4">Dados Gerais</h6>
@@ -94,66 +106,160 @@ include '../includes/menu.php';
                                         <textarea name="observacao" disabled class="form-control"><?php echo $dCliente['observacao'] ?></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="card widget mb-4">
-
-                                <h6 class="card-title mb-4">Projetos Contratados</h6>
-                                <div class="d-flex flex-wrap">
-                                    <?php
-                                    $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto WHERE cliente = '$cnpj' ";
-                                    $rP = mysqli_query($conexao, $sqlProjetos);
-                                    while ($p = mysqli_fetch_array($rP)) :
-                                    ?>
-                                        <p class="btn btn-primary text-uppercase m-2"><?php echo $p['nome_projeto'] ?></p>
-                                    <?php endwhile; ?>
-                                </div>
-                            </div>
-                            <div class="card mb-4">
                                 <div class="card-body">
                                     <h6 class="card-title mb-4">Contatos</h6>
-                                    <?php
-                                    $sqlContato = "SELECT * FROM contatos_clientes WHERE id_cliente = '$id' ORDER BY id DESC ";
-                                    $rCt = mysqli_query($conexao, $sqlContato);
-                                    $c = mysqli_fetch_array($rCt); ?>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Responsável</label>
-                                                <input type="text" class="form-control" disabled value="<?php echo $c['responsavel'] ?>">
+                                                <input type="text" class="form-control" disabled value="<?php echo $dCliente['responsavel'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Telefone</label>
-                                                <input type="text" class="form-control" disabled value="<?php echo $c['telefone'] ?>">
+                                                <input type="text" class="form-control" disabled value="<?php echo $dCliente['telefone'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Whatsapp</label>
-                                                <input type="text" class="form-control" disabled value="<?php echo $c['whatsapp'] ?>">
+                                                <input type="text" class="form-control" disabled value="<?php echo $dCliente['whatsapp'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">E-mail</label>
-                                                <input type="email" class="form-control" disabled value="<?php echo $c['email'] ?>">
+                                                <input type="email" class="form-control" disabled value="<?php echo $dCliente['email'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="mb-3">
                                                 <label class="form-label">Website</label>
-                                                <input type="text" class="form-control" disabled value="<?php echo $c['site'] ?>">
+                                                <input type="text" class="form-control" disabled value="<?php echo $dCliente['site'] ?>">
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="mb-3">
                                                 <label class="form-label">Endereço</label>
-                                                <input type="text" class="form-control" disabled value="<?php echo $c['endereco'] ?>">
+                                                <input type="text" class="form-control" disabled value="<?php echo $dCliente['endereco'] ?>">
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="editar" role="tabpanel" aria-labelledby="editar-tab">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title mb-4">Editar Dados Gerais</h6>
+                                <div class="col-md-6 mb-3">
+                                    <label for="" class="form-label">Atualizar Logo</label>
+                                    <form action="../includes/edita_logo.php" method="POST" enctype="multipart/form-data">
+                                        <input type="hidden" name="url" value="<?php echo $url ?>">
+                                        <input type="hidden" name="id_cliente" value="<?php echo $dCliente['id_cliente']; ?>">
+                                        <div class="input-group">
+                                            <input type="file" name="logo" accept="image/*" required class="form-control">
+                                            <button class="btn btn-outline-secondary" type="submit">Salvar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <form action="../includes/edita_cliente.php" method="POST" enctype="multipart/form-data">
+                                    <input type="hidden" name="id_cliente" value="<?php echo $dCliente['id_cliente']; ?>">
+                                    <input type="hidden" name="url" value="<?php echo $url ?>">
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">CNPJ</label>
+                                            <input type="text" class="form-control" disabled value="<?php echo $dCliente['cnpj'] ?>">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">STATUS</label>
+                                            <select name="status_cliente" class="form-select" id="">
+                                                <option value="<?php echo $dCliente['status_cliente'] ?>"><?php echo $dCliente['nome_status'] ?></option>
+                                                <?php $sql = "SELECT * FROM status_clientes";
+                                                $resultado = mysqli_query($conexao, $sql);
+                                                while ($status = mysqli_fetch_array($resultado)) : ?>
+                                                    <option value="<?php echo $status['id_status'] ?>"><?php echo $status['nome_status'] ?></option>
+                                                <?php endwhile; ?>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Extensão do Contrato</label>
+                                            <input type="text" name="extensao" class="form-control" value="<?php echo $dCliente['extensao'] ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">De (ano)</label>
+                                            <input type="text" name="de_ano" class="form-control" value="<?php echo $dCliente['de_ano'] ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Até (ano)</label>
+                                            <input type="text" name="ate_ano" class="form-control" value="<?php echo $dCliente['ate_ano'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-4">
+                                            <label class="form-label">Quantitativo</label>
+                                            <input type="text" name="quantitativo" class="form-control" value="<?php echo $dCliente['quantitativo'] ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Bonificação</label>
+                                            <input type="text" name="bonificacao" class="form-control" value="R$ <?php echo $dCliente['bonificacao'] ?>">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label class="form-label">Bonificação paga em</label>
+                                            <input type="text" name="pago_em" class="form-control" value="<?php echo $dCliente['pago_em'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Observação</label>
+                                        <textarea name="observacao" class="form-control"><?php echo $dCliente['observacao'] ?></textarea>
+                                    </div>
+                                    <button class="btn btn-primary">Salvar</button>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h6 class="card-title mb-4">Editar Contatos</h6>
+                                <form action="../includes/crud_contato.php" method="POST">
+                                    <input type="hidden" name="url" value="<?php echo $url ?>">
+                                    <input type="hidden" name="id" value="<?php echo $dCliente['id_cliente']; ?>">
+                                    <input type="hidden" name="user" value="<?php echo $email_user; ?>">
+                                    <div class="mb-3">
+                                        <label class="form-label">Responsável</label>
+                                        <input type="text" name="responsavel" class="form-control" value="<?php echo $dCliente['responsavel'] ?>">
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Telefone</label>
+                                            <input type="text" name="telefone" class="form-control" value="<?php echo $dCliente['telefone'] ?>">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Whatsapp</label>
+                                            <input type="text" name="whatsapp" class="form-control" value="<?php echo $dCliente['whatsapp'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">E-mail</label>
+                                            <input type="email" name="email" class="form-control" value="<?php echo $dCliente['email'] ?>">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Website</label>
+                                            <input type="text" name="site" class="form-control" value="<?php echo $dCliente['site'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Endereço</label>
+                                        <input type="text" name="endereco" class="form-control" value="<?php echo $dCliente['endereco'] ?>">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -163,8 +269,7 @@ include '../includes/menu.php';
                                 <h6 class="card-title mb-4">Atualizar status de Projetos</h6>
                                 <form action="../includes/crud_projeto.php" method="POST" enctype="multipart/form-data">
                                     <input type="hidden" name="url" value="<?php echo $url; ?>">
-                                    <input type="hidden" name="cliente" value="<?php echo $id; ?>">
-                                    <input type="hidden" name="cnpj" value="<?php echo $cnpj; ?>">
+                                    <input type="hidden" name="id_cliente" value="<?php echo $id; ?>">
                                     <input type="hidden" name="user" value="<?php echo $email_user; ?>">
                                     <div class="row">
                                         <div class="col-md-6 mb-3">
@@ -172,7 +277,7 @@ include '../includes/menu.php';
                                             <select name="projeto" class="form-select" required>
                                                 <option value="">Selecione</option>
                                                 <?php
-                                                $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto WHERE cliente = '$cnpj' ";
+                                                $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto WHERE cliente = '$id' ";
                                                 $rP = mysqli_query($conexao, $sqlProjetos);
                                                 while ($p = mysqli_fetch_array($rP)) :
                                                 ?>
@@ -291,122 +396,30 @@ include '../includes/menu.php';
                                         <input type="hidden" name="url" value="<?php echo $url ?>">
                                         <input type="hidden" name="user" value="<?php echo $email_user; ?>">
                                         <textarea name="reuniao" id="editor" rows="10"></textarea>
+                                        <div class="my-3">
+                                            <label class="form-label">Projetos do cliente</label>
+                                            <div class="d-flex flex-wrap">
+                                                <?php
+                                                $sqlProj = "SELECT * FROM projetos_existentes";
+                                                $rP = mysqli_query($conexao, $sqlProj);
+                                                while ($proj = mysqli_fetch_array($rP)) :
+                                                ?>
+                                                    <div class="form-check px-4 mb-3">
+                                                        <input class="form-check-input" type="checkbox" name="projeto[]" value="<?php echo $proj['id_projeto'] ?>" id="<?php echo $proj['id_projeto'] ?>">
+                                                        <label class="form-check-label" for="<?php echo $proj['id_projeto'] ?>">
+                                                            <span class="text-uppercase"><?php echo $proj['nome_projeto'] ?></span>
+                                                        </label>
+                                                    </div>
+                                                <?php endwhile; ?>
+                                            </div>
+                                        </div>
                                         <button class="btn btn-primary mt-4" type="submit">Salvar</button>
                                     </form>
                                 <?php endif; ?>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="editar" role="tabpanel" aria-labelledby="editar-tab">
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h6 class="card-title mb-4">Editar Dados Gerais</h6>
-                                <div class="col-md-6 mb-3">
-                                    <label for="" class="form-label">Atualizar Logo</label>
-                                    <form action="../includes/edita_logo.php" method="POST" enctype="multipart/form-data">
-                                        <input type="hidden" name="url" value="<?php echo $url ?>">
-                                        <input type="hidden" name="id_cliente" value="<?php echo $dCliente['id_cliente']; ?>">
-                                        <div class="input-group">
-                                            <input type="file" name="logo" accept="image/*" required class="form-control">
-                                            <button class="btn btn-outline-secondary" type="submit">Salvar</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                <form action="../includes/edita_cliente.php" method="POST" enctype="multipart/form-data">
-                                    <input type="hidden" name="id_cliente" value="<?php echo $dCliente['id_cliente']; ?>">
-                                    <input type="hidden" name="url" value="<?php echo $url ?>">
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">CNPJ</label>
-                                            <input type="text" class="form-control" disabled value="<?php echo $dCliente['cnpj'] ?>">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">STATUS</label>
-                                            <select name="status_cliente" class="form-select" id="">
-                                                <option value="<?php echo $dCliente['status_cliente'] ?>"><?php echo $dCliente['nome_status'] ?></option>
-                                                <?php $sql = "SELECT * FROM status_clientes";
-                                                $resultado = mysqli_query($conexao, $sql);
-                                                while ($status = mysqli_fetch_array($resultado)) : ?>
-                                                    <option value="<?php echo $status['id_status'] ?>"><?php echo $status['nome_status'] ?></option>
-                                                <?php endwhile; ?>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-4">
-                                            <label class="form-label">Extensão do Contrato</label>
-                                            <input type="text" name="extensao" class="form-control" value="<?php echo $dCliente['extensao'] ?>">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">De (ano)</label>
-                                            <input type="text" name="de_ano" class="form-control" value="<?php echo $dCliente['de_ano'] ?>">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">Até (ano)</label>
-                                            <input type="text" name="ate_ano" class="form-control" value="<?php echo $dCliente['ate_ano'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-4">
-                                            <label class="form-label">Quantitativo</label>
-                                            <input type="text" name="quantitativo" class="form-control" value="<?php echo $dCliente['quantitativo'] ?>">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">Bonificação</label>
-                                            <input type="text" name="bonificacao" class="form-control" value="R$ <?php echo $dCliente['bonificacao'] ?>">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <label class="form-label">Bonificação paga em</label>
-                                            <input type="text" name="pago_em" class="form-control" value="<?php echo $dCliente['pago_em'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Observação</label>
-                                        <textarea name="observacao" class="form-control"><?php echo $dCliente['observacao'] ?></textarea>
-                                    </div>
-                                    <button class="btn btn-primary">Salvar</button>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="card mb-4">
-                            <div class="card-body">
-                                <h6 class="card-title mb-4">Editar Contatos</h6>
-                                <form action="../includes/crud_contato.php" method="POST">
-                                    <input type="hidden" name="url" value="<?php echo $url ?>">
-                                    <input type="hidden" name="id" value="<?php echo $dCliente['id_cliente']; ?>">
-                                    <div class="mb-3">
-                                        <label class="form-label">Responsável</label>
-                                        <input type="text" name="responsavel" class="form-control" value="<?php echo $c['responsavel'] ?>">
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">Telefone</label>
-                                            <input type="text" name="telefone" class="form-control" value="<?php echo $c['telefone'] ?>">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Whatsapp</label>
-                                            <input type="text" name="whatsapp" class="form-control" value="<?php echo $c['whatsapp'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="row mb-3">
-                                        <div class="col-md-6">
-                                            <label class="form-label">E-mail</label>
-                                            <input type="email" name="email" class="form-control" value="<?php echo $c['email'] ?>">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label class="form-label">Website</label>
-                                            <input type="text" name="site" class="form-control" value="<?php echo $c['site'] ?>">
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label class="form-label">Endereço</label>
-                                        <input type="text" name="endereco" class="form-control" value="<?php echo $c['endereco'] ?>">
-                                    </div>
-                                    <button type="submit" class="btn btn-primary">Salvar</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
+
 
 
                 </div>

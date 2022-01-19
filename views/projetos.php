@@ -23,22 +23,24 @@ include '../includes/menu.php';
         </a>
         <!-- ../ Logo -->
         <div class="page-title">Projetos</div>
-        <div class="header-bar ms-auto">
-            <ul class="navbar-nav justify-content-end">
-                <li class="nav-item ms-3">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProjeto">
-                        <i class="bi bi-plus-circle"></i> Novo Projeto
-                    </button>
-                </li>
-            </ul>
-        </div>
-        <!-- Header mobile buttons -->
-        <div class="header-mobile-buttons">
-            <button type="button" class="btn btn-primary d-md-none actions-btn" data-bs-toggle="modal" data-bs-target="#addProjeto">
-                <i class="bi bi-plus-circle"></i> Novo Projeto
-            </button>
-        </div>
-        <!-- ../ Header mobile buttons -->
+        <?php if ($dados_user['status_user'] == 9) : ?>
+            <div class="header-bar ms-auto">
+                <ul class="navbar-nav justify-content-end">
+                    <li class="nav-item ms-3">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addProjeto">
+                            <i class="bi bi-plus-circle"></i> Novo Projeto
+                        </button>
+                    </li>
+                </ul>
+            </div>
+            <!-- Header mobile buttons -->
+            <div class="header-mobile-buttons">
+                <button type="button" class="btn btn-primary d-md-none actions-btn" data-bs-toggle="modal" data-bs-target="#addProjeto">
+                    <i class="bi bi-plus-circle"></i> Novo Projeto
+                </button>
+            </div>
+            <!-- ../ Header mobile buttons -->
+        <?php endif; ?>
     </div>
     <!-- ../ header -->
 

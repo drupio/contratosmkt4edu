@@ -66,6 +66,5 @@ include '../includes/menu.php';
     <!-- ../ content -->
 
     <?php
-    include '../includes/modal-horas.php';
     include '../includes/footer.php';
     ?>

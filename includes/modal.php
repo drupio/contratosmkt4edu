@@ -13,12 +13,6 @@ $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julh
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <!-- <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label for="" class="form-label">Logo</label>
-                            <input type="file" name="logo" class="form-control" id="">
-                        </div>
-                    </div> -->
                     <div class="row mb-3">
                         <div class="col-md-3 mb-3 form-floating">
                             <input type="text" data-input-mask="cnpj" name="cnpj" class="form-control" placeholder="CNPJ" required>
@@ -52,24 +46,18 @@ $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julh
                         </div>
                     </div>
                     <div class="row mb-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Projetos do cliente</label>
-                            <div class="d-flex flex-wrap">
-                                <?php
-                                $sqlProj = "SELECT * FROM projetos_existentes";
-                                $rP = mysqli_query($conexao, $sqlProj);
-                                while ($proj = mysqli_fetch_array($rP)) :
-                                ?>
-                                    <div class="form-check px-4 mb-3">
-                                        <input class="form-check-input" type="checkbox" name="projeto[]" value="<?php echo $proj['id_projeto'] ?>" id="<?php echo $proj['id_projeto'] ?>">
-                                        <label class="form-check-label" for="<?php echo $proj['id_projeto'] ?>">
-                                            <span class="text-uppercase"><?php echo $proj['nome_projeto'] ?></span>
-                                        </label>
-                                    </div>
+                        <div class="col-md-4 form-floating">
+                            <select name="status_cliente" class="form-select" required>
+                                <option value="">Selecione</option>
+                                <?php $sql = "SELECT * FROM status_clientes";
+                                $resultado = mysqli_query($conexao, $sql);
+                                while ($status = mysqli_fetch_array($resultado)) : ?>
+                                    <option value="<?php echo $status['id_status'] ?>"><?php echo $status['nome_status'] ?></option>
                                 <?php endwhile; ?>
-                            </div>
+                            </select>
+                            <label>Status do Cliente</label>
                         </div>
-                        <div class="col-md-6 form-floating">
+                        <div class="col-md-8 form-floating">
                             <textarea class="form-control" maxlength="2000" name="observacao" placeholder="Observação" style="height: 100px;"></textarea>
                             <label>Observação</label>
                         </div>

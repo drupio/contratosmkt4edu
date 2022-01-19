@@ -55,20 +55,10 @@ else :
     $ate_ano = mysqli_real_escape_string($conexao, $_POST['ate_ano']);
     $bonificacao = mysqli_real_escape_string($conexao, $_POST['bonificacao']);
     $observacao = mysqli_real_escape_string($conexao, $_POST['observacao']);
-    $projeto = $_POST['projeto'];
+    $status_cliente = mysqli_real_escape_string($conexao, $_POST['status_cliente']);
 
-    $sql = "INSERT INTO clientes (nome_cliente, cnpj, quantitativo, extensao, de_ano, ate_ano, bonificacao, observacao) VALUES ('$nome_cliente', '$cnpj', '$quantitativo', '$extensao', '$de_ano', '$ate_ano', '$bonificacao', '$observacao')";
+    $sql = "INSERT INTO clientes (nome_cliente, cnpj, quantitativo, extensao, de_ano, ate_ano, bonificacao, observacao, status_cliente) VALUES ('$nome_cliente', '$cnpj', '$quantitativo', '$extensao', '$de_ano', '$ate_ano', '$bonificacao', '$observacao', '$status_cliente')";
     if (mysqli_query($conexao, $sql)) :
-        for ($i = 0; $i < count($projeto); $i++) :
-            $sqlp = "INSERT INTO projetos_clientes (cliente, projeto) VALUES ('$cnpj', '$projeto[$i]')";
-            if (mysqli_query($conexao, $sqlp)) :
-                $_SESSION['success'] = true;
-                header("Location: $url");
-            else :
-                $msg = mysqli_error($conexao);
-                echo $msg;
-            endif;
-        endfor;
         $_SESSION['success'] = true;
         header("Location: $url");
     else :

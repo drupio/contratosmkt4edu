@@ -49,6 +49,7 @@ if (isset($_GET['id'])) :
     endif;
 endif;
 
+
 function convertHoras($horasInteiras)
 {
     // Define o formato de saida

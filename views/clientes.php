@@ -91,25 +91,30 @@ include '../includes/menu.php';
                                 <td>
                                     <div class="d-flex flex-wrap">
                                         <?php
-                                        $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto JOIN status_projetos AS s ON c.status = s.id_status WHERE cliente = '{$d['cnpj']}' ";
+                                        $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto JOIN status_projetos AS s ON c.status = s.id_status WHERE cliente = '{$d['id_cliente']}' ";
                                         $rP = mysqli_query($conexao, $sqlProjetos);
-                                        while ($p = mysqli_fetch_array($rP)) :
-                                            if ($p['status'] == 1) :
-                                                $cor = 'info';
-                                            elseif ($p['status'] == 2) :
-                                                $cor = 'warning';
-                                            elseif ($p['status'] == 3) :
-                                                $cor = 'secondary';
-                                            elseif ($p['status'] == 4) :
-                                                $cor = 'secondary';
-                                            elseif ($p['status'] == 5) :
-                                                $cor = 'danger';
-                                            elseif ($p['status'] == 6) :
-                                                $cor = 'success';
-                                            endif;
+                                        $exist = mysqli_num_rows($rP);
+                                        if ($exist == 0) :
+                                            echo "<span class='badge m-1 bg-dark text-uppercase'> Nenhum Projeto Cadastrado</span>";
+                                        else :
+                                            while ($p = mysqli_fetch_array($rP)) :
+                                                if ($p['status'] == 1) :
+                                                    $cor = 'info';
+                                                elseif ($p['status'] == 2) :
+                                                    $cor = 'warning';
+                                                elseif ($p['status'] == 3) :
+                                                    $cor = 'secondary';
+                                                elseif ($p['status'] == 4) :
+                                                    $cor = 'secondary';
+                                                elseif ($p['status'] == 5) :
+                                                    $cor = 'danger';
+                                                elseif ($p['status'] == 6) :
+                                                    $cor = 'success';
+                                                endif;
                                         ?>
-                                            <span class="badge m-1 bg-<?php echo $cor ?> text-uppercase" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $p['nome_status'] ?>"> <?php echo $p['nome_projeto'] ?></span>
-                                        <?php endwhile; ?>
+                                                <span class="badge m-1 bg-<?php echo $cor ?> text-uppercase" data-bs-toggle="tooltip" data-bs-placement="top" title="<?php echo $p['nome_status'] ?>"> <?php echo $p['nome_projeto'] ?></span>
+                                        <?php endwhile;
+                                        endif; ?>
                                     </div>
                                 </td>
                                 <td class="text-center">

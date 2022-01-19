@@ -30,8 +30,7 @@ function clear($input)
 $url = mysqli_escape_string($conexao, $_POST['url']);
 $user = mysqli_escape_string($conexao, $_POST['user']);
 
-$cnpj = mysqli_real_escape_string($conexao, $_POST['cnpj']);
-$cliente = mysqli_real_escape_string($conexao, $_POST['cliente']);
+$id_cliente = mysqli_real_escape_string($conexao, $_POST['id_cliente']);
 $projeto = mysqli_real_escape_string($conexao, $_POST['projeto']);
 $status = mysqli_real_escape_string($conexao, $_POST['status']);
 $hora = mysqli_real_escape_string($conexao, $_POST['horas']);
@@ -51,12 +50,12 @@ else :
     $anexo = null;
 endif;
 
-$sqlProjeto = "INSERT INTO timeline VALUES (default, '$cliente', '$projeto', '$status', '$minuto', '$anexo', '$comentario', '$data', '$user')";
+$sqlProjeto = "INSERT INTO timeline VALUES (default, '$id_cliente', '$projeto', '$status', '$minuto', '$anexo', '$comentario', '$data', '$user')";
 if (mysqli_query($conexao, $sqlProjeto)) :
-    $sqlstatus = "UPDATE projetos_clientes SET status = '$status' WHERE cliente = '$cnpj' AND projeto = '$projeto'";
+    $sqlstatus = "UPDATE projetos_clientes SET status = '$status' WHERE cliente = '$id_cliente' AND projeto = '$projeto'";
     if (mysqli_query($conexao, $sqlstatus)) :
         $_SESSION['success'] = true;
-        header("Location: $url?id=$cliente");
+        header("Location: $url?id=$id_cliente");
     else :
         $msg = mysqli_error($conexao);
         echo $msg;

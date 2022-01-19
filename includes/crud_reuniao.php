@@ -32,9 +32,20 @@ $url = mysqli_escape_string($conexao, $_POST['url']);
 $id = mysqli_escape_string($conexao, $_POST['id']);
 $user = mysqli_escape_string($conexao, $_POST['user']);
 $reuniao = mysqli_escape_string($conexao, $_POST['reuniao']);
+$projeto = $_POST['projeto'];
 
 $sql = "INSERT INTO reuniao VALUES (default, '$id', '$reuniao', '$data', '$user')";
 if (mysqli_query($conexao, $sql)) :
+    for ($i = 0; $i < count($projeto); $i++) :
+        $sqlp = "INSERT INTO projetos_clientes (cliente, projeto) VALUES ('$id', '$projeto[$i]')";
+        if (mysqli_query($conexao, $sqlp)) :
+            $_SESSION['success'] = true;
+            header("Location: $url");
+        else :
+            $msg = mysqli_error($conexao);
+            echo $msg;
+        endif;
+    endfor;
     $_SESSION['success'] = true;
     header("Location: $url?id=$id");
 else :
