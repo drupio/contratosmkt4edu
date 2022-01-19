@@ -17,7 +17,7 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 include 'conexao.php';
 
 
-$dir = __DIR__;
+$dir = __DIR__ . '/anexos';
 
 //Clear
 function clear($input)
@@ -57,9 +57,8 @@ $sqlProjeto = "INSERT INTO timeline VALUES (default, '$id_cliente', '$projeto', 
 if (mysqli_query($conexao, $sqlProjeto)) :
     $sqlstatus = "UPDATE projetos_clientes SET status = '$status' WHERE cliente = '$id_cliente' AND projeto = '$projeto'";
     if (mysqli_query($conexao, $sqlstatus)) :
-        echo $dir;
-    // $_SESSION['success'] = true;
-    // header("Location: $url?id=$id_cliente");
+        $_SESSION['success'] = true;
+        header("Location: $url?id=$id_cliente");
     else :
         $msg = mysqli_error($conexao);
         echo $msg;
