@@ -25,6 +25,13 @@ endif;
 $id_user = $_SESSION['id_user'];
 $url = $_SERVER['PHP_SELF'];
 
+$dir = substr(__DIR__, 0, 2);
+if ($dir != 'C:') :
+    $img_dir = 'https://assets.mktforeducation.com/';
+else :
+    $img_dir = '../includes/';
+endif;
+
 $sql = "SELECT * FROM users WHERE id_user = '$id_user'";
 $resultadoUser = mysqli_query($conexao, $sql);
 $dados_user = mysqli_fetch_array($resultadoUser);

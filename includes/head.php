@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="../libs/dataTable/datatables.min.css" type="text/css">
     <link rel="stylesheet" href="../libs/datepicker/daterangepicker.css" type="text/css">
     <link rel="stylesheet" href="../libs/lightbox/magnific-popup.css" type="text/css">
-    
+
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -72,7 +72,7 @@
                 <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown">
                     <div class="avatar me-3 border">
                         <?php if (!empty($dados_user['foto_user'])) : ?>
-                            <img src="<?php echo "../includes/user/" . $dados_user['foto_user']; ?>" class="rounded-circle" alt="image">
+                            <img src="<?php echo $img_dir . 'users' . '/' . $dados_user['foto_user']; ?>" class="rounded-circle" alt="image">
                         <?php else : ?>
                             <img src="../assets/images/user.png" class="rounded-circle" alt="image">
                         <?php endif; ?>

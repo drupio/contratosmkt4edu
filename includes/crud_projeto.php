@@ -15,7 +15,7 @@ $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julh
 $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' . $minuto . ':' . $segundos;
 
 include 'conexao.php';
-$dir = __DIR__. '/anexos';
+$dir = __DIR__ . '/anexos';
 
 //Clear
 function clear($input)
@@ -45,7 +45,7 @@ if ($_FILES['anexo']['size'] > 0) :
     $arquivo = str_replace(' ', '-', $arquivo);
     $ext = pathinfo($arquivo, PATHINFO_EXTENSION);
     $arquivonome = pathinfo($arquivo, PATHINFO_FILENAME);
-    $anexo = $arquivonome . '_' . $cliente . '_' . md5(rand(1, 99)) . '.' . $ext;
+    $anexo = $arquivonome . '_' . $id_cliente . '_' . md5(rand(1, 99)) . '.' . $ext;
     move_uploaded_file($_FILES['anexo']['tmp_name'], "$dir/$anexo");
 else :
     $anexo = null;
