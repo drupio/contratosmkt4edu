@@ -27,7 +27,7 @@ $url = $_SERVER['PHP_SELF'];
 
 $dir = substr(__DIR__, 0, 2);
 if ($dir != 'C:') :
-    $img_dir = 'https://dash.mktforeducation.com/';
+    $img_dir = 'https://dash.mktforeducation.com/includes/';
 else :
     $img_dir = '../includes/';
 endif;
