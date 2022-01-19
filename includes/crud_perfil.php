@@ -3,7 +3,7 @@ session_start();
 
 include 'conexao.php';
 
-$dir = __DIR__ . './users';
+$dir = __DIR__ . '/users';
 
 //Clear
 function clear($input)
