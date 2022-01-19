@@ -34,7 +34,7 @@ include '../includes/menu.php';
         <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
             <figure class="me-4 flex-shrink-0">
                 <?php if (!empty($dCliente['logo_cliente'])) : ?>
-                    <img width="100" class="rounded-pill" src="../assets/images/logos/<?php echo $dCliente['logo_cliente']; ?>" alt="">
+                    <img width="100" class="rounded-pill" src="<?php echo $img_dir . '/logos' . '/' . $dCliente['logo_cliente']; ?>" alt="">
                 <?php else : ?>
                     <img width="100" class="rounded-pill" src="../assets/images/logos/logo.png" alt="">
                 <?php endif; ?>
@@ -48,18 +48,6 @@ include '../includes/menu.php';
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
                         <div class="mb-4">
-                            <!-- <div class="card widget mb-4">
-                                <h6 class="card-title mb-4">Projetos Contratados</h6>
-                                <div class="d-flex flex-wrap">
-                                    <?php
-                                    $sqlProjetos = "SELECT * FROM projetos_clientes AS c JOIN projetos_existentes AS p ON c.projeto = p.id_projeto WHERE cliente = '$id' ";
-                                    $rP = mysqli_query($conexao, $sqlProjetos);
-                                    while ($p = mysqli_fetch_array($rP)) :
-                                    ?>
-                                        <p class="btn btn-primary text-uppercase m-2"><?php echo $p['nome_projeto'] ?></p>
-                                    <?php endwhile; ?>
-                                </div>
-                            </div> -->
                             <div class="card mb-4">
                                 <div class="card-body">
                                     <h6 class="card-title mb-4">Dados Gerais</h6>
