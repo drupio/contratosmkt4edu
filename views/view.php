@@ -358,7 +358,7 @@ include '../includes/menu.php';
                                         <div class="card-body">
                                             <p class="card-text"><?php echo $timeline['comentario'] ?></p>
                                             <?php if (!empty($timeline['anexo'])) : ?>
-                                                <i class="fa fa-paperclip" aria-hidden="true"></i> <a href="../assets/anexos/<?php echo $timeline['anexo'] ?>" target="_blank"><?php echo $timeline['anexo'] ?></a></span>
+                                                <i class="fa fa-paperclip" aria-hidden="true"></i> <a href="../includes/anexos/<?php echo $timeline['anexo'] ?>" target="_blank"><?php echo $timeline['anexo'] ?></a></span>
                                             <?php endif; ?>
                                         </div>
                                         <div class="card-footer">

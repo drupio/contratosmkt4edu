@@ -72,7 +72,7 @@
                 <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown">
                     <div class="avatar me-3 border">
                         <?php if (!empty($dados_user['foto_user'])) : ?>
-                            <img src="<?php echo "../assets/images/user/" . $dados_user['foto_user']; ?>" class="rounded-circle" alt="image">
+                            <img src="<?php echo "../includes/user/" . $dados_user['foto_user']; ?>" class="rounded-circle" alt="image">
                         <?php else : ?>
                             <img src="../assets/images/user.png" class="rounded-circle" alt="image">
                         <?php endif; ?>

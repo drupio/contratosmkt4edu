@@ -72,8 +72,8 @@ include '../includes/menu.php';
                             <tr>
                                 <td>
                                     <?php if (!empty($d['logo_cliente'])) : ?>
-                                        <a class="image-popup" href="../assets/images/logos/<?php echo $d['logo_cliente']; ?>">
-                                            <img width="100" class="rounded-circle border avatar me-3" src="../assets/images/logos/<?php echo $d['logo_cliente']; ?>" alt="">
+                                        <a class="image-popup" href="../includes/logos/<?php echo $d['logo_cliente']; ?>">
+                                            <img width="100" class="rounded-circle border avatar me-3" src="../includes/logos/<?php echo $d['logo_cliente']; ?>" alt="">
                                         </a>
                                     <?php else : ?>
                                         <img src="../assets/images/logos/logo.png" class="rounded-circle border avatar me-3" alt="image">

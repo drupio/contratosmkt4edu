@@ -3,6 +3,8 @@ session_start();
 
 include 'conexao.php';
 
+$dir = __DIR__ . '/users';
+
 //Clear
 function clear($input)
 {
@@ -58,7 +60,7 @@ if (isset($_POST['mudar_foto'])) :
         exit;
     else :
         $foto = md5($_FILES['foto']['name'] . rand(1, 999)) . '.jpg';
-        move_uploaded_file($_FILES['foto']['tmp_name'], "../assets/images/user/$foto");
+        move_uploaded_file($_FILES['foto']['tmp_name'], "$dir/$foto");
 
         $sql = "UPDATE users SET foto_user = '$foto' WHERE id_user = '$user'";
         if (mysqli_query($conexao, $sql)) :

@@ -16,6 +16,8 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 
 include 'conexao.php';
 
+$dir = __DIR__ . '/logos';
+
 // tamanho do upload
 define('KB', 1024);
 define('MB', 1048576);
@@ -44,7 +46,7 @@ if ($_FILES['logo']['size'] > $pesoArquivo) :
     exit;
 else :
     $logo_cliente = md5($_FILES['logo']['name'] . rand(1, 999)) . '.jpg';
-    move_uploaded_file($_FILES['logo']['tmp_name'], "../assets/images/logos/$logo_cliente");
+    move_uploaded_file($_FILES['logo']['tmp_name'], "$dir/$logo_cliente");
 endif;
 
 $sql = "UPDATE clientes SET logo_cliente = '$logo_cliente' WHERE id_cliente = '$id_cliente'";
