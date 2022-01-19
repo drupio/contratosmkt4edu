@@ -16,7 +16,7 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 
 include 'conexao.php';
 
-$dir = __DIR__ . '/logos';
+$dir = __DIR__ . './logos';
 
 // tamanho do upload
 define('KB', 1024);

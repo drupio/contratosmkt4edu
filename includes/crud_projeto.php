@@ -15,7 +15,9 @@ $meses = array("Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julh
 $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' . $minuto . ':' . $segundos;
 
 include 'conexao.php';
-$dir = __DIR__ . '/anexos';
+
+
+$dir = __DIR__ . './anexos';
 
 //Clear
 function clear($input)
