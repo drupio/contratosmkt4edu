@@ -57,8 +57,9 @@ $sqlProjeto = "INSERT INTO timeline VALUES (default, '$id_cliente', '$projeto', 
 if (mysqli_query($conexao, $sqlProjeto)) :
     $sqlstatus = "UPDATE projetos_clientes SET status = '$status' WHERE cliente = '$id_cliente' AND projeto = '$projeto'";
     if (mysqli_query($conexao, $sqlstatus)) :
-        $_SESSION['success'] = true;
-        header("Location: $url?id=$id_cliente");
+        echo $dir;
+    // $_SESSION['success'] = true;
+    // header("Location: $url?id=$id_cliente");
     else :
         $msg = mysqli_error($conexao);
         echo $msg;
