@@ -17,7 +17,7 @@ $data = $dia . ' de ' . $meses[$mes - 1] . ' de ' . $ano . ' - ' . $hora . ':' .
 include 'conexao.php';
 
 
-$dir = __DIR__ . './anexos';
+$dir = '../assets/anexos';
 
 //Clear
 function clear($input)
