@@ -64,9 +64,8 @@ if (isset($_POST['mudar_foto'])) :
 
         $sql = "UPDATE users SET foto_user = '$foto' WHERE id_user = '$user'";
         if (mysqli_query($conexao, $sql)) :
-            var_dump($dir);
-        // $_SESSION['success'] = true;
-        // header("Location: $url");
+            $_SESSION['success'] = true;
+            header("Location: $url");
         else :
             $_SESSION['erro'] = true;
             header("Location: $url");
