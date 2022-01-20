@@ -46,7 +46,7 @@ include '../includes/menu.php';
         <?php include '../includes/alertas.php'; ?>
         <div class="row mb-4">
             <div class="col-md-6">
-                <div class="card">
+                <div class="card widget">
                     <div class="card-body">
                         <p class="card-title"><strong class="text-success"><?php echo $total_id; ?></strong> CLIENTES CADASTRADOS</p>
                         <div id="chartClientes" style="width: 100%;"></div>
@@ -62,10 +62,8 @@ include '../includes/menu.php';
                                         role: 'annotation'
                                     }],
                                     <?php
-                                    $sqlc = "SELECT *, count(status_cliente) AS total FROM clientes AS c JOIN status_clientes AS s ON c.status_cliente = s.id_status GROUP BY c.status_cliente, s.id_status";
-                                    $resc = mysqli_query($conexao, $sqlc);
-                                    while ($cliente = mysqli_fetch_array($resc)) :
-                                    ?>['<?php echo $cliente['nome_status'] ?>', <?php echo $cliente['total'] ?>, <?php echo $cliente['total'] ?>],
+                                    while ($cliente = mysqli_fetch_array($res_status_clientes)) :
+                                    ?>['<?php echo $cliente['nome_status'] ?>', <?php echo $cliente['total_status'] ?>, <?php echo $cliente['total_status'] ?>],
                                     <?php endwhile; ?>
                                 ]);
                                 var options = {
@@ -76,6 +74,7 @@ include '../includes/menu.php';
                                         width: '100%',
                                         height: '100%'
                                     },
+                                    backgroundColor: 'transparent',
                                     colors: ['#25c2e3', '#faae42', '#05b171', '#ea4444'],
                                 };
                                 var chart = new google.visualization.PieChart(document.getElementById('chartClientes'));
@@ -86,13 +85,11 @@ include '../includes/menu.php';
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="row mb-4">
             <?php
-            $sql = "SELECT * FROM projetos_existentes";
-            $res = mysqli_query($conexao, $sql);
-            while ($projetos = mysqli_fetch_array($res)) :
+            $sqlProjetos = "SELECT * FROM projetos_existentes";
+            $res_projetos = mysqli_query($conexao, $sqlProjetos);
+            while ($projetos = mysqli_fetch_array($res_projetos)) :
             ?>
                 <div class="col-md-6 mb-4">
                     <div class="card">
@@ -109,9 +106,9 @@ include '../includes/menu.php';
                                     var data = google.visualization.arrayToDataTable([
                                         ['Status', 'Quantidade'],
                                         <?php
-                                        $sqls = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}' GROUP BY status";
-                                        $ress = mysqli_query($conexao, $sqls);
-                                        while ($projeto = mysqli_fetch_array($ress)) :
+                                        $sqlStatusProjetos = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}'";
+                                        $res_status_projetos = mysqli_query($conexao, $sqlStatusProjetos);
+                                        while ($projeto = mysqli_fetch_array($res_status_projetos)) :
                                         ?>['<?php echo $projeto['nome_status'] ?>', <?php echo $projeto['total'] ?>],
                                         <?php endwhile; ?>
                                     ]);
