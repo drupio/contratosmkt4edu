@@ -109,7 +109,7 @@ include '../includes/menu.php';
                                     var data = google.visualization.arrayToDataTable([
                                         ['Status', 'Quantidade'],
                                         <?php
-                                        $sqls = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}'";
+                                        $sqls = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}' GROUP BY status";
                                         $ress = mysqli_query($conexao, $sqls);
                                         while ($projeto = mysqli_fetch_array($ress)) :
                                         ?>['<?php echo $projeto['nome_status'] ?>', <?php echo $projeto['total'] ?>],
@@ -132,6 +132,48 @@ include '../includes/menu.php';
                     </div>
                 </div>
             <?php endwhile; ?>
+
+            <div class="col-md-6">
+                <div id="chart_div"></div>
+                <script type="text/javascript">
+                    // Load the Visualization API and the corechart package.
+                    google.charts.load('current', {
+                        'packages': ['corechart']
+                    });
+
+                    // Set a callback to run when the Google Visualization API is loaded.
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    // Callback that creates and populates a data table,
+                    // instantiates the pie chart, passes in the data and
+                    // draws it.
+                    function drawChart() {
+
+                        // Create the data table.
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Topping');
+                        data.addColumn('number', 'Slices');
+                        data.addRows([
+                            ['Mushrooms', 3],
+                            ['Onions', 1],
+                            ['Olives', 1],
+                            ['Zucchini', 1],
+                            ['Pepperoni', 2]
+                        ]);
+
+                        // Set chart options
+                        var options = {
+                            'title': 'How Much Pizza I Ate Last Night',
+                            'width': 400,
+                            'height': 300
+                        };
+
+                        // Instantiate and draw our chart, passing in some options.
+                        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+                        chart.draw(data, options);
+                    }
+                </script>
+            </div>
         </div>
     </div>
 </div>
