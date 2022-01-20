@@ -109,7 +109,7 @@ include '../includes/menu.php';
                                     var data = google.visualization.arrayToDataTable([
                                         ['Status', 'Quantidade'],
                                         <?php
-                                        $sqls = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}' GROUP BY status";
+                                        $sqls = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}'";
                                         $ress = mysqli_query($conexao, $sqls);
                                         while ($projeto = mysqli_fetch_array($ress)) :
                                         ?>['<?php echo $projeto['nome_status'] ?>', <?php echo $projeto['total'] ?>],
