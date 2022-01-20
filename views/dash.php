@@ -44,55 +44,100 @@ include '../includes/menu.php';
     <!-- content -->
     <div class="content pt-1">
         <?php include '../includes/alertas.php'; ?>
+        <div class="row mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="card-title"><strong class="text-success"><?php echo $total_id; ?></strong> CLIENTES CADASTRADOS</p>
+                        <div id="chartClientes" style="width: 100%;"></div>
+                        <script type="text/javascript">
+                            google.charts.load("current", {
+                                packages: ["corechart"]
+                            });
+                            google.charts.setOnLoadCallback(drawChart);
 
+                            function drawChart() {
+                                var data = google.visualization.arrayToDataTable([
+                                    ['Status', 'Quantidade', {
+                                        role: 'annotation'
+                                    }],
+                                    <?php
+                                    $sqlc = "SELECT *, count(status_cliente) AS total FROM clientes AS c JOIN status_clientes AS s ON c.status_cliente = s.id_status GROUP BY status_cliente";
+                                    $resc = mysqli_query($conexao, $sqlc);
+                                    while ($cliente = mysqli_fetch_array($resc)) :
+                                    ?>['<?php echo $cliente['nome_status'] ?>', <?php echo $cliente['total'] ?>, <?php echo $cliente['total'] ?>],
+                                    <?php endwhile; ?>
+                                ]);
+                                var options = {
+                                    is3D: true,
+                                    chartArea: {
+                                        left: 10,
+                                        top: 0,
+                                        width: '100%',
+                                        height: '100%'
+                                    },
+                                    colors: ['#25c2e3', '#faae42', '#05b171', '#ea4444'],
+                                };
+                                var chart = new google.visualization.PieChart(document.getElementById('chartClientes'));
+                                chart.draw(data, options);
+                            }
+                        </script>
 
-        <div class="col-lg-5 col-md-12">
-            <div class="card widget h-100">
-                <div class="card-header d-flex">
-                    <h6 class="card-title">
-                        Channels
-                        <a href="#" class="bi bi-question-circle ms-1 small" data-bs-toggle="tooltip" title="Channels where your products are sold"></a>
-                    </h6>
-                </div>
-                <div class="card-body">
-                    <div id="sales-channels"></div>
-                    <div class="row text-center mb-3 mt-4">
-                        <div class="col-4">
-                            <div class="display-7">48%</div>
-                            <div class="text-success my-2 small">
-                                <i class="bi bi-arrow-up me-1 small"></i>30.50%
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <i class="bi bi-circle-fill text-orange me-2 small"></i>
-                                <span class="text-muted">Social</span>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="display-7">30%</div>
-                            <div class="text-danger my-2 small">
-                                <i class="bi bi-arrow-down me-1 small"></i>15.20%
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <i class="bi bi-circle-fill text-cyan me-2 small"></i>
-                                <span class="text-muted">Google</span>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="display-7">22%</div>
-                            <div class="text-success my-2 small">
-                                <i class="bi bi-arrow-up me-1 small"></i>1.80%
-                            </div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <i class="bi bi-circle-fill text-indigo me-2 small"></i>
-                                <span class="text-muted">Email</span>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="row mb-4">
+            <?php
+            $sql = "SELECT * FROM projetos_existentes";
+            $res = mysqli_query($conexao, $sql);
+            while ($projetos = mysqli_fetch_array($res)) :
+            ?>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <p class="card-title"><?php echo $projetos['nome_projeto'] ?></p>
+                            <div id="chart<?php echo $projetos['id_projeto'] ?>" style="width: 100%;"></div>
+                            <script type="text/javascript">
+                                google.charts.load("current", {
+                                    packages: ["corechart"]
+                                });
+                                google.charts.setOnLoadCallback(drawChart);
+
+                                function drawChart() {
+                                    var data = google.visualization.arrayToDataTable([
+                                        ['Status', 'Quantidade'],
+                                        <?php
+                                        $sqls = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}' GROUP BY status";
+                                        $ress = mysqli_query($conexao, $sqls);
+                                        while ($projeto = mysqli_fetch_array($ress)) :
+                                        ?>['<?php echo $projeto['nome_status'] ?>', <?php echo $projeto['total'] ?>],
+                                        <?php endwhile; ?>
+                                    ]);
+                                    var options = {
+                                        is3D: true,
+                                        chartArea: {
+                                            left: 10,
+                                            top: 0,
+                                            width: '100%',
+                                            height: '100%'
+                                        }
+                                    };
+                                    var chart = new google.visualization.PieChart(document.getElementById('chart<?php echo $projetos['id_projeto'] ?>'));
+                                    chart.draw(data, options);
+                                }
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            <?php endwhile; ?>
+        </div>
     </div>
-    <?php
-    include '../includes/modal.php';
-    include '../includes/footer.php';
-    ?>
+</div>
+</div>
+</div>
+<?php
+include '../includes/modal.php';
+include '../includes/footer.php';
+?>

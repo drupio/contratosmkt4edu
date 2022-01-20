@@ -55,7 +55,7 @@ include '../includes/menu.php';
                 <table class="table table-custom table-lg mb-0 text-uppercase" id="datatable">
                     <thead>
                         <tr>
-                            <th>LOGO</th>
+                            <th>LOGO </th>
                             <th>CLIENTE</th>
                             <th class="text-center">Status</th>
                             <th class="text-center">Quant</th>

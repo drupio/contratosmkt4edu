@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="../libs/dataTable/datatables.min.css" type="text/css">
     <link rel="stylesheet" href="../libs/datepicker/daterangepicker.css" type="text/css">
     <link rel="stylesheet" href="../libs/lightbox/magnific-popup.css" type="text/css">
-
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -46,6 +46,9 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="theme-color" content="#f5f4fe" />
+
+   
+
 
 </head>
 

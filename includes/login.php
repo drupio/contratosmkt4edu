@@ -23,7 +23,8 @@ $sql = "SELECT * FROM users WHERE email_user = '$login' AND pwd_user = '$senha'"
 $resultado = mysqli_query($conexao, $sql);
 $row = mysqli_num_rows($resultado);
 
-// 2e8a97057eedd058f5be91e80152e3e2
+// VM@102030
+// d6de27e20a21c38f45169587d8154d27
 
 if ($row == 1) :
     $dados = mysqli_fetch_assoc($resultado);

@@ -56,6 +56,16 @@ if (isset($_GET['id'])) :
     endif;
 endif;
 
+$sql_id = "SELECT count(id_cliente) AS total_id FROM clientes";
+$res_id = mysqli_query($conexao, $sql_id);
+$total_id = mysqli_fetch_array($res_id);
+$total_id = $total_id['total_id'];
+
+$sql_projetos = "SELECT count(id) AS total_projetos FROM projetos_clientes";
+$res_projetos = mysqli_query($conexao, $sql_projetos);
+$total_projetos = mysqli_fetch_array($res_projetos);
+$total_projetos = $total_projetos['total_projetos'];
+
 
 function convertHoras($horasInteiras)
 {
