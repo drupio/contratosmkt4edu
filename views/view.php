@@ -312,10 +312,10 @@ include '../includes/menu.php';
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">COMENTÁRIO</label>
-                                        <div class="input-group mb-3">
-                                            <input type="text" name="comentario" class="form-control" required placeholder="Comente aqui">
-                                            <button class="btn btn-primary" type="submit">Salvar</button>
+                                        <div class="mb-3">
+                                            <textarea name="comentario" id="editor2" style="height: 50px;"></textarea>
                                         </div>
+                                        <button class="btn btn-primary" type="submit">Salvar</button>
                                     </div>
                                 </form>
                             </div>
