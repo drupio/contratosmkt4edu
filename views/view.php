@@ -352,7 +352,7 @@ include '../includes/menu.php';
                                         <div class="card-footer">
                                             <div class="d-flex justify-content-between">
                                                 <div>
-                                                    <span class="text-muted small"><i class="fa fa-calendar-check-o" aria-hidden="true"></i> <?php echo $timeline['criado_em'] ?> | <i class="fa fa-user" aria-hidden="true"></i> <?php echo $timeline['criado_por'] ?></span>
+                                                    <span class="text-muted small">#<?php echo $timeline['id'] ?> | <i class="fa fa-calendar-check-o" aria-hidden="true"></i> <?php echo $timeline['criado_em'] ?> | <i class="fa fa-user" aria-hidden="true"></i> <?php echo $timeline['criado_por'] ?></span>
                                                 </div>
                                                 <div>
                                                     <span class="text-muted small"><i class="fa fa-hourglass-end" aria-hidden="true"></i>
