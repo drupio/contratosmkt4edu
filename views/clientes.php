@@ -65,7 +65,7 @@ include '../includes/menu.php';
                     </thead>
                     <tbody>
                         <?php
-                        $sqlC = "SELECT * FROM clientes AS c JOIN status_clientes AS s ON c.status_cliente = s.id_status";
+                        $sqlC = "SELECT * FROM clientes AS c JOIN status_clientes AS s ON c.status_cliente = s.id_status ORDER BY nome_cliente";
                         $r = mysqli_query($conexao, $sqlC);
                         while ($d = mysqli_fetch_array($r)) :
                         ?>
