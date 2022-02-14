@@ -14,7 +14,7 @@ if (substr($dir, 0, 2) == 'C:') :
 else :
     $usuario = "mkt_user";
     $senha = "$0i6Wx{QUzaY";
-    $banco = "cadastro_db";
+    $banco = "contratos_db";
 endif;
 
 $conexao = mysqli_connect($servidor, $usuario, $senha) or die(mysqli_error($conexao));
