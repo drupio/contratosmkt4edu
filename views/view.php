@@ -31,7 +31,7 @@ include '../includes/menu.php';
     <div class="content pt-1">
         <?php include '../includes/alertas.php'; ?>
 
-        <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
+        <div class="d-flex flex-column flex-md-row text-center align-items-center text-md-start mb-3">
             <figure class="me-4 flex-shrink-0">
                 <?php if (!empty($dCliente['logo_cliente'])) : ?>
                     <img width="100" class="rounded-pill" src="<?php echo $img_dir . '/logos' . '/' . $dCliente['logo_cliente']; ?>" alt="">
@@ -39,8 +39,11 @@ include '../includes/menu.php';
                     <img width="100" class="rounded-pill" src="../assets/images/logos/logo.png" alt="">
                 <?php endif; ?>
             </figure>
-            <div class="d-flex align-items-center">
-                <h2 class="text-uppercase"><?php echo $dCliente['nome_cliente'] ?></h2>
+            <div class="m-0">
+                <h2 class="text-uppercase mb-0"><?php echo $dCliente['nome_cliente'] ?></h2>
+                <p class="small text-muted">
+                    ID: <?php echo $dCliente['id_cliente'] ?>
+                </p>
             </div>
         </div>
         <div class="row flex-column-reverse flex-md-row">
