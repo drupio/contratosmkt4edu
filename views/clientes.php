@@ -45,16 +45,15 @@ include '../includes/menu.php';
     <!-- content -->
     <div class="content pt-1">
         <?php include '../includes/alertas.php'; ?>
-
-
         <div class="card widget">
             <div class="card-header">
                 <h5 class="card-title">Lista de Clientes</h5>
             </div>
             <div class="table-responsive">
-                <table class="table table-custom table-lg mb-0 text-uppercase" id="datatable">
+                <table class="table table-custom table-hover table-lg mb-0 text-uppercase" id="datatable">
                     <thead>
                         <tr>
+                            <th>ID</th>
                             <th>LOGO </th>
                             <th>CLIENTE</th>
                             <th class="text-center">Status</th>
@@ -70,6 +69,9 @@ include '../includes/menu.php';
                         while ($d = mysqli_fetch_array($r)) :
                         ?>
                             <tr>
+                                <td class="small text-muted">
+                                    <?php echo $d['id_cliente'] ?>
+                                </td>
                                 <td>
                                     <?php if (!empty($d['logo_cliente'])) : ?>
                                         <a class="image-popup" href="<?php echo $img_dir . 'logos' . '/' . $d['logo_cliente']; ?>">

@@ -67,15 +67,28 @@ include '../includes/menu.php';
                                     <?php endwhile; ?>
                                 ]);
                                 var options = {
-                                    is3D: true,
+
                                     chartArea: {
                                         left: 10,
                                         top: 0,
                                         width: '100%',
                                         height: '100%'
                                     },
+
                                     backgroundColor: 'transparent',
-                                    // colors: ['#25c2e3', '#faae42', '#05b171', '#ea4444'],
+                                    slices: [{
+                                        color: '#25c2e3'
+                                    }, {
+                                        color: '#faae42'
+                                    }, {
+                                        color: '#9932e7'
+                                    }, {
+                                        color: '#4e0089'
+                                    }, {
+                                        color: '#ea4444'
+                                    }, {
+                                        color: '#05b171'
+                                    }]
                                 };
                                 var chart = new google.visualization.PieChart(document.getElementById('chartClientes'));
                                 chart.draw(data, options);
@@ -94,7 +107,7 @@ include '../includes/menu.php';
                 <div class="col-md-6 mb-4">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-title"><?php echo $projetos['nome_projeto'] ?></p>
+                            <p class="card-title text-uppercase"><?php echo $projetos['nome_projeto'] ?></p>
                             <div id="chart<?php echo $projetos['id_projeto'] ?>" style="width: 100%;"></div>
                             <script type="text/javascript">
                                 google.charts.load("current", {
@@ -106,14 +119,13 @@ include '../includes/menu.php';
                                     var data = google.visualization.arrayToDataTable([
                                         ['Status', 'Quantidade'],
                                         <?php
-                                        $sqlStatusProjetos = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}' GROUP BY p.status, s.id_status";
+                                        $sqlStatusProjetos = "SELECT *, count(status) AS total FROM projetos_clientes AS p JOIN status_projetos AS s ON p.status = s.id_status WHERE projeto = '{$projetos['id_projeto']}' GROUP BY s.id_status";
                                         $res_status_projetos = mysqli_query($conexao, $sqlStatusProjetos);
                                         while ($projeto = mysqli_fetch_array($res_status_projetos)) :
                                         ?>['<?php echo $projeto['nome_status'] ?>', <?php echo $projeto['total'] ?>],
                                         <?php endwhile; ?>
                                     ]);
                                     var options = {
-                                        is3D: true,
                                         chartArea: {
                                             left: 10,
                                             top: 0,
@@ -121,6 +133,19 @@ include '../includes/menu.php';
                                             height: '100%'
                                         },
                                         backgroundColor: 'transparent',
+                                        slices: [{
+                                            color: '#25c2e3'
+                                        }, {
+                                            color: '#faae42'
+                                        }, {
+                                            color: '#9932e7'
+                                        }, {
+                                            color: '#4e0089'
+                                        }, {
+                                            color: '#ea4444'
+                                        }, {
+                                            color: '#05b171'
+                                        }]
                                     };
                                     var chart = new google.visualization.PieChart(document.getElementById('chart<?php echo $projetos['id_projeto'] ?>'));
                                     chart.draw(data, options);

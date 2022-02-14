@@ -12,9 +12,9 @@ if (substr($dir, 0, 2) == 'C:') :
     $senha = "";
     $banco = "cadastromkt4edu";
 else :
-    $usuario = "mkt_user";
-    $senha = "$0i6Wx{QUzaY";
-    $banco = "contratos_db";
+    $usuario = "drupio";
+    $senha = "Bia0310leo";
+    $banco = "dashmkt";
 endif;
 
 $conexao = mysqli_connect($servidor, $usuario, $senha) or die(mysqli_error($conexao));
